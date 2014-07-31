@@ -84,19 +84,14 @@ class ObtainCreditCardActionTest extends \PHPUnit_Framework_TestCase
     public function shouldRenderFormWhenNotSubmitted()
     {
         $httpRequest = new Request;
+        $httpRequest->setMethod('GET');
 
         $formView = new FormView;
 
         $formMock = $this->createFormMock();
         $formMock
-            ->expects($this->once())
-            ->method('handleRequest')
-            ->with($this->identicalTo($httpRequest))
-        ;
-        $formMock
-            ->expects($this->once())
-            ->method('isSubmitted')
-            ->will($this->returnValue(false))
+            ->expects($this->never())
+            ->method('bind')
         ;
         $formMock
             ->expects($this->once())
@@ -159,6 +154,7 @@ class ObtainCreditCardActionTest extends \PHPUnit_Framework_TestCase
     public function shouldRenderFormWhenSubmittedButNotValid()
     {
         $httpRequest = new Request;
+        $httpRequest->setMethod('POST');
 
         $formView = new FormView;
 
@@ -167,13 +163,9 @@ class ObtainCreditCardActionTest extends \PHPUnit_Framework_TestCase
         $formMock = $this->createFormMock();
         $formMock
             ->expects($this->once())
-            ->method('handleRequest')
+            ->method('bind')
             ->with($this->identicalTo($httpRequest))
-        ;
-        $formMock
-            ->expects($this->once())
-            ->method('isSubmitted')
-            ->will($this->returnValue(true))
+            ->will($this->returnValue($formMock))
         ;
         $formMock
             ->expects($this->once())
@@ -242,19 +234,16 @@ class ObtainCreditCardActionTest extends \PHPUnit_Framework_TestCase
     public function shouldRenderFormWhenSubmitedAndValid()
     {
         $httpRequest = new Request;
+        $httpRequest->setMethod('POST');
 
         $creditCard = new CreditCard;
 
         $formMock = $this->createFormMock();
         $formMock
             ->expects($this->once())
-            ->method('handleRequest')
+            ->method('bind')
             ->with($this->identicalTo($httpRequest))
-        ;
-        $formMock
-            ->expects($this->once())
-            ->method('isSubmitted')
-            ->will($this->returnValue(true))
+            ->will($this->returnValue($formMock))
         ;
         $formMock
             ->expects($this->once())

@@ -40,7 +40,7 @@ class CreditCardTypeTest extends WebTestCase
             'csrf_protection' => false
         ));
 
-        $form->submit(array(
+        $form->bind(array(
             'holder' => 'John Doe',
             'number' => '4111111111111111',
             'securityCode' => '123',
@@ -73,7 +73,7 @@ class CreditCardTypeTest extends WebTestCase
             'csrf_protection' => false
         ));
 
-        $form->submit(array(
+        $form->bind(array(
             'holder' => '',
             'number' => '4111111111111111',
             'securityCode' => '123',
@@ -97,7 +97,7 @@ class CreditCardTypeTest extends WebTestCase
             'csrf_protection' => false
         ));
 
-        $form->submit(array(
+        $form->bind(array(
             'holder' => 'John Doe',
             'number' => '',
             'securityCode' => '123',
@@ -121,7 +121,7 @@ class CreditCardTypeTest extends WebTestCase
             'csrf_protection' => false
         ));
 
-        $form->submit(array(
+        $form->bind(array(
             'holder' => 'John Doe',
             'number' => '1234',
             'securityCode' => '123',
@@ -145,7 +145,7 @@ class CreditCardTypeTest extends WebTestCase
             'csrf_protection' => false
         ));
 
-        $form->submit(array(
+        $form->bind(array(
             'holder' => 'John Doe',
             'number' => '4111111111111111',
             'securityCode' => '',
@@ -169,7 +169,7 @@ class CreditCardTypeTest extends WebTestCase
             'csrf_protection' => false
         ));
 
-        $form->submit(array(
+        $form->bind(array(
             'holder' => 'John Doe',
             'number' => '4111111111111111',
             'securityCode' => '',
