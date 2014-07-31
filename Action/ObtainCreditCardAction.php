@@ -63,8 +63,7 @@ class ObtainCreditCardAction extends PaymentAwareAction
 
         $form = $this->createCreditCardForm();
 
-        $form->handleRequest($this->httpRequest);
-        if ($form->isSubmitted()) {
+        if ($this->httpRequest->isMethod('POST') && $form->bind($this->httpRequest)) {
             /** @var CreditCardInterface $card */
             $card = $form->getData();
             $card->secure();
@@ -73,7 +72,7 @@ class ObtainCreditCardAction extends PaymentAwareAction
                 $request->set($card);
 
                 return;
-             }
+            }
         }
 
         $renderTemplate = new RenderTemplate($this->templateName, array(

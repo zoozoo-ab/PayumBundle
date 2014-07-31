@@ -258,6 +258,10 @@ class AbstractPaymentFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldAddCommonLogExtensions()
     {
+        if (version_compare(Kernel::VERSION, '2.2.0', '<')) {
+            $this->markTestSkipped('Feature avaliable for symfony since 2.2 only.');
+        }
+
         $factory = $this->createAbstractPaymentFactory();
 
         $container = new ContainerBuilder;

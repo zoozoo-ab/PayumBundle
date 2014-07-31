@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\HttpKernel\Kernel;
 
 class PayumExtension extends Extension implements PrependExtensionInterface
 {
@@ -35,6 +36,11 @@ class PayumExtension extends Extension implements PrependExtensionInterface
         // load services
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('payum.xml');
+
+        if (version_compare(Kernel::VERSION, '2.2.0', '<')) {
+            $container->removeDefinition('payum.extension.log_executed_actions');
+            $container->removeDefinition('payum.extension.logger');
+        }
 
         $this->loadStorages($config['storages'], $container);
         $this->loadSecurity($config['security'], $container);

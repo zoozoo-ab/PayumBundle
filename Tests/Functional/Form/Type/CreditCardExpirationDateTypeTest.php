@@ -41,7 +41,7 @@ class CreditCardExpirationDateTypeTest extends WebTestCase
             'csrf_protection' => false,
         ));
 
-        $form->submit(array(
+        $form->bind(array(
             'day' => 1,
             'month' => 1,
             'year' => 2020,
