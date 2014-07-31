@@ -36,6 +36,11 @@ class PayumExtension extends Extension implements PrependExtensionInterface
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('payum.xml');
 
+        if (version_compare(Kernel::VERSION, '2.2.0', '<')) {
+            $container->removeDefinition('payum.extension.log_executed_actions');
+            $container->removeDefinition('payum.extension.logger');
+        }
+
         $this->loadStorages($config['storages'], $container);
         $this->loadSecurity($config['security'], $container);
         $this->loadContexts($config['contexts'], $container);
